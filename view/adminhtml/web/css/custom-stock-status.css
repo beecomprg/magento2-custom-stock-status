@@ -1,0 +1,33 @@
+.admin__fieldset > .admin__field.custom-status-grid > .admin__field-control {
+    width: 100% !important;
+    float: none !important;
+}
+
+.admin__dynamic-rows th._required span::after {
+    display: none !important;
+}
+
+.custom-quantity-label {
+    float: left;
+    line-height: 33px;
+    padding-right: 5px;
+    font-weight: 700;
+    display: none !important;
+}
+
+.qty_from input {
+    width: 65% !important;
+}
+
+.qty_to input {
+    width: 65% !important;
+    display: none !important;
+}
+
+.showInputs .qty_to input {
+    display: block !important;
+}
+
+.showInputs .custom-quantity-label {
+    display: block !important;
+}

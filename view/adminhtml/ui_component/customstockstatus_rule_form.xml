@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">customstockstatus_rule_form.customstockstatus_rule_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Labels</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="save" class="Beecom\CustomStockStatus\Block\Adminhtml\Rule\Edit\SaveButton"/>
+            <button name="save_and_continue" class="Beecom\CustomStockStatus\Block\Adminhtml\Rule\Edit\SaveAndContinueButton"/>
+            <button name="back">
+                <url path="*/*/"/>
+                <class>back</class>
+                <label translate="true">Back</label>
+            </button>
+        </buttons>
+        <namespace>customstockstatus_rule_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>customstockstatus_rule_form.customstockstatus_rule_form_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="beecom_customstockstatus_rule_listing_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="beecom_customstockstatus/product_rule/save"/>
+        </settings>
+        <dataProvider class="Beecom\CustomStockStatus\Model\DataProvider" name="customstockstatus_rule_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>rule_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="rule_information">
+        <settings>
+            <collapsible>false</collapsible>
+            <opened>true</opened>
+            <label translate="true">Rule Information</label>
+        </settings>
+        <field name="rule_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">customstockstatus</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>rule_id</dataScope>
+            </settings>
+        </field>
+        <field name="name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">customstockstatus</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Rule Name</label>
+                <visible>true</visible>
+                <dataScope>name</dataScope>
+            </settings>
+        </field>
+        <field name="is_active" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">customstockstatus</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Status</label>
+                <visible>true</visible>
+                <dataScope>is_active</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="0" xsi:type="array">
+                                <item name="value" xsi:type="number">1</item>
+                                <item name="label" xsi:type="string" translate="true">Active</item>
+                            </option>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="number">0</item>
+                                <item name="label" xsi:type="string" translate="true">Inactive</item>
+                            </option>
+                        </options>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="storeviews" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>int</dataType>
+                <label translate="true">Scope</label>
+                <dataScope>store_id</dataScope>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="Magento\Cms\Ui\Component\Listing\Column\Cms\Options"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+        <field name="sort_order" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">customstockstatus</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Priority</label>
+                <dataScope>sort_order</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+
+    <htmlContent name="block_promo_catalog_edit_tab_conditions" sortOrder="20">
+        <argument name="data" xsi:type="array">
+            <item name="wrapper" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Conditions</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <settings>
+            <wrapper>
+                <canShow>true</canShow>
+                <componentType>fieldset</componentType>
+            </wrapper>
+        </settings>
+        <block class="Beecom\CustomStockStatus\Block\Adminhtml\Rule\Edit\Tab\Conditions" name="promo_catalog_edit_tab"/>
+    </htmlContent>
+
+    <fieldset name="customstockstatus_rule_form_set">
+        <settings>
+            <collapsible>false</collapsible>
+            <opened>true</opened>
+            <label translate="true">Custom Stock Statuses</label>
+        </settings>
+
+        <container name="customstockstatus_rule_form_container">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/dynamic-rows</item>
+                    <item name="template" xsi:type="string">ui/dynamic-rows/templates/default</item>
+                    <item name="componentType" xsi:type="string">dynamicRows</item>
+                    <item name="recordTemplate" xsi:type="string">record</item>
+                    <item name="addButtonLabel" xsi:type="string">Add Row</item>
+                    <item name="deleteProperty" xsi:type="boolean">false</item>
+                    <item name="dndConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="additionalClasses" xsi:type="string">custom-status-grid</item>
+                </item>
+            </argument>
+
+            <container name="record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Dynamic Rows</item>
+                        <item name="component" xsi:type="string" translate="true">Magento_Ui/js/dynamic-rows/record</item>
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="showFallbackReset" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+
+                <field name="rule_id">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">ID</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataScope" xsi:type="string">rule_id</item>
+                        </item>
+                    </argument>
+                </field>
+
+                <field name="rule_type" formElement="select">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">customstockstatus</item>
+                            <item name="sortOrder" xsi:type="number">0</item>
+                            <item name="component" xsi:type="string">Beecom_CustomStockStatus/js/form/element/rule-type</item>
+                            <item name="elementTmpl" xsi:type="string">Beecom_CustomStockStatus/form/element/rule-type</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>number</dataType>
+                        <label translate="true">Quantity</label>
+                        <visible>true</visible>
+                        <dataScope>rule_type</dataScope>
+                    </settings>
+                    <formElements>
+                        <select>
+                            <settings>
+                                <options>
+                                    <option name="0" xsi:type="array">
+                                        <item name="value" xsi:type="number">5</item>
+                                        <item name="label" xsi:type="string" translate="true">Range</item>
+                                    </option>
+                                    <option name="1" xsi:type="array">
+                                        <item name="value" xsi:type="number">1</item>
+                                        <item name="label" xsi:type="string" translate="true">Larger than</item>
+                                    </option>
+                                    <option name="2" xsi:type="array">
+                                        <item name="value" xsi:type="number">2</item>
+                                        <item name="label" xsi:type="string" translate="true">Less than</item>
+                                    </option>
+                                    <option name="3" xsi:type="array">
+                                        <item name="value" xsi:type="number">3</item>
+                                        <item name="label" xsi:type="string" translate="true">Equal or larger than</item>
+                                    </option>
+                                    <option name="4" xsi:type="array">
+                                        <item name="value" xsi:type="number">4</item>
+                                        <item name="label" xsi:type="string" translate="true">Equal or less than</item>
+                                    </option>
+                                </options>
+                            </settings>
+                        </select>
+                    </formElements>
+                </field>
+
+                <field name="qty_from">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="additionalClasses" xsi:type="string">qty_from</item>
+                            <item name="dataType" xsi:type="string">number</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataScope" xsi:type="string">qty_from</item>
+                            <item name="showFallbackReset" xsi:type="boolean">false</item>
+                            <item name="elementTmpl" xsi:type="string">Beecom_CustomStockStatus/form/element/qty-from</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                                <item name="validate-number" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                        </item>
+                    </argument>
+                </field>
+
+                <field name="qty_to">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">number</item>
+                            <item name="additionalClasses" xsi:type="string">qty_to</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataScope" xsi:type="string">qty_to</item>
+                            <item name="showFallbackReset" xsi:type="boolean">false</item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="validate-number" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="elementTmpl" xsi:type="string">Beecom_CustomStockStatus/form/element/qty-to</item>
+                        </item>
+                    </argument>
+                </field>
+
+                <field name="text">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="label" xsi:type="string" translate="true">Text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataScope" xsi:type="string">text</item>
+                            <item name="showFallbackReset" xsi:type="boolean">false</item>
+                            <item name="sortOrder" xsi:type="number">30</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+
+                <actionDelete>
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="componentType" xsi:type="string">actionDelete</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="fit" xsi:type="boolean">false</item>
+                            <item name="label" xsi:type="string">Actions</item>
+                            <item name="additionalClasses" xsi:type="string">data-grid-actions-cell</item>
+                            <item name="template" xsi:type="string">Magento_Backend/dynamic-rows/cells/action-delete</item>
+                        </item>
+                    </argument>
+                </actionDelete>
+
+                <field name="position">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">number</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="componentType" xsi:type="string">field</item>
+                            <item name="label" xsi:type="string" translate="true">Position</item>
+                            <item name="dataScope" xsi:type="string">position</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                </field>
+
+            </container>
+        </container>
+    </fieldset>
+    <htmlContent name="notice.replacements">
+        <block class="Magento\Framework\View\Element\Text" name="custom.stock.notice.replacements">
+            <arguments>
+                <argument translate="true" name="text" xsi:type="string">
+                    <![CDATA[
+                        <div class="message message-warning">
+                        You can use replacement values in text that shall be replaced upon rendering on the front end. <br/>
+                        Available replacement values are: {qty}
+                        </div>
+                    ]]>
+                </argument>
+            </arguments>
+        </block>
+    </htmlContent>
+    <htmlContent name="notice">
+        <block class="Magento\Framework\View\Element\Text" name="custom.stock.notice">
+            <arguments>
+                <argument translate="true" name="text" xsi:type="string">
+                    <![CDATA[
+                        <div class="message message-warning">
+                        In case of improper configuration (multiple rules matching 1 product) the first rule shall be applied based on its upper position.
+                        </div>
+                    ]]>
+                </argument>
+            </arguments>
+        </block>
+    </htmlContent>
+</form>

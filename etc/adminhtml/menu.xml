@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Beecom_CustomStockStatus::rules"
+             title="Custom Stock Status"
+             module="Beecom_CustomStockStatus"
+             parent="Beecom_Core::all"
+             sortOrder="100"
+             resource="Beecom_CustomStockStatus::rule"
+        />
+
+        <add id="Beecom_CustomStockStatus::rule" title="Stock rules" module="Beecom_CustomStockStatus"
+             sortOrder="10" action="beecom_customstockstatus/product_rule/index"
+             resource="Beecom_CustomStockStatus::rules" parent="Beecom_CustomStockStatus::rules"/>
+    </menu>
+</config>

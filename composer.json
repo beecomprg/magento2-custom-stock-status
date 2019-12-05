@@ -1,0 +1,29 @@
+{
+  "name": "beecomprg/module-custom-stock-status",
+  "description": "Custom stock status",
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Vojta",
+      "email": "vojta@beecom.io",
+      "homepage": "https://www.beecom.io",
+      "role": "Leader"
+    }
+  ],
+  "require": {
+    "beecom/module-core": "*"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Beecom\\CustomStockStatus\\": ""
+    }
+  }
+}

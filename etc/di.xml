@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="BeecomCustomStockStatusCustomStockGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Beecom\CustomStockStatus\Model\ResourceModel\CustomStock\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">BeecomCustomStockStatusCustomStockGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BeecomCustomStockStatusCustomStockGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Beecom\CustomStockStatus\Model\ResourceModel\CustomStock\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">beecom_custom_stock_status</argument>
+            <argument name="resourceModel" xsi:type="string">Beecom\CustomStockStatus\Model\ResourceModel\CustomStock</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="customstockstatus_rule_form_data_source" xsi:type="string">Beecom\CustomStockStatus\Model\ResourceModel\CustomStock\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Beecom\CustomStockStatus\Api\Data\CustomStockInterface" type="Beecom\CustomStockStatus\Model\CustomStock" />
+    <preference for="Beecom\CustomStockStatus\Api\CustomStockRepositoryInterface" type="Beecom\CustomStockStatus\Model\CustomStockRepository" />
+    <preference for="Beecom\CustomStockStatus\Api\Data\CustomStockSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Beecom\CustomStockStatus\Api\Data\RuleInterface" type="Beecom\CustomStockStatus\Model\Rule" />
+    <preference for="Beecom\CustomStockStatus\Api\RuleRepositoryInterface" type="Beecom\CustomStockStatus\Model\RuleRepository" />
+    <preference for="Beecom\CustomStockStatus\Api\Data\RuleSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Beecom\CustomStockStatus\Api\Data\CustomStockInterface" xsi:type="string">Beecom\CustomStockStatus\Api\CustomStockRepositoryInterface</item>
+                <item name="Beecom\CustomStockStatus\Api\Data\RuleInterface" xsi:type="string">Beecom\CustomStockStatus\Api\RuleRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Beecom\CustomStockStatus\Api\Data\CustomStockInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="storeReader" xsi:type="string">Beecom\CustomStockStatus\Model\ResourceModel\CustomStock\Relation\Store\ReadHandler</item>
+                    </item>
+                    <item name="create" xsi:type="array">
+                        <item name="storeCreator" xsi:type="string">Beecom\CustomStockStatus\Model\ResourceModel\CustomStock\Relation\Store\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="storeUpdater" xsi:type="string">Beecom\CustomStockStatus\Model\ResourceModel\CustomStock\Relation\Store\SaveHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Beecom\CustomStockStatus\Api\Data\CustomStockInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Beecom\CustomStockStatus\Api\Data\RuleInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Beecom\CustomStockStatus\Api\Data\CustomStockInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">beecom_custom_stock_status</item>
+                    <item name="identifierField" xsi:type="string">rule_id</item>
+                </item>
+                <item name="Beecom\CustomStockStatus\Api\Data\RuleInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">beecom_custom_stock_status_rule</item>
+                    <item name="identifierField" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Beecom\CustomStockStatus\Model\Api\SearchCriteria\CollectionProcessor\PageFilterProcessor"
+                 type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
+        <arguments>
+            <argument name="customFilters" xsi:type="array">
+                <item name="store_id" xsi:type="object">Beecom\CustomStockStatus\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor\PageStoreFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Beecom\CustomStockStatus\Model\Api\SearchCriteria\CustomStockCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Beecom\CustomStockStatus\Model\Api\SearchCriteria\CollectionProcessor\PageFilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Beecom\CustomStockStatus\Model\Api\SearchCriteria\RuleCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Beecom\CustomStockStatus\Model\Api\SearchCriteria\CollectionProcessor\PageFilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+</config>

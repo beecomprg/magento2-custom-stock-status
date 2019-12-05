@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Beecom_CustomStockStatus::css/custom-stock-status.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="customstockstatus_rule_form"/>
+        </referenceContainer>
+    </body>
+</page>
