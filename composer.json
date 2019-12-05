@@ -16,7 +16,7 @@
     }
   ],
   "require": {
-    "beecomprg/module-core": "*"
+    "beecomprg/magento-2-module-core": "*"
   },
   "autoload": {
     "files": [
