@@ -110,7 +110,10 @@ class ProductRule extends \Magento\Catalog\Block\Product\AbstractProduct
         $productQty = $product->getExtensionAttributes()->getStockItem()->getQty();
 
         $matchedRule = $this->getMatchedRule($rules->getItems(), $productQty);
-
+        if($matchedRule == false) {
+            return false;
+        }
+        
         return $this->replaceValues($matchedRule['text'], $productQty);
     }
 
