@@ -9,6 +9,7 @@ use Magento\Store\Model\Store;
 class Collection extends \Magento\Cms\Model\ResourceModel\AbstractCollection
 {
     protected $_idFieldName = 'rule_id';
+    protected $_previewFlag;
 
     protected function _construct()
     {
